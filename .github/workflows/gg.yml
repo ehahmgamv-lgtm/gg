@@ -10,4 +10,4 @@ jobs:
         run: |
           lscpu
           sudo apt install stress-ng
-          stress-ng --cpu $(nproc) --timeout 30s & for i in {1..30}; do awk '{print "Core " NR-1 ": " $1/1000 " MHz"}' /sys/devices/system/cpu/cpu*/cpufreq/scaling_cur_freq; echo "---"; sleep 1; done
+          stress-ng --cpu $(nproc) --timeout 30s & for i in {1..30}; do awk -F': ' '/cpu MHz/ {print "Core " c++ ": " $2 " MHz"}' /proc/cpuinfo; echo "---"; sleep 1; done
