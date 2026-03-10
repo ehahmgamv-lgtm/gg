@@ -1,0 +1,13 @@
+name: RDP Ubuntu (Final Fix)
+
+on: workflow_dispatch
+
+jobs:
+  rdp-session:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 1. Установка графики (XFCE)
+        run: |
+          lscpu
+          sudo apt install stress-ng
+          stress-ng --cpu $(nproc) --timeout 30s & watch -n 1 "awk '{print \"Core \" NR-1 \": \" \$1/1000 \" MHz\"}' /sys/devices/system/cpu/cpu*/cpufreq/scaling_cur_freq"
